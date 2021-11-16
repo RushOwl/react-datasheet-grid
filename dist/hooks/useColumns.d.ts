@@ -1,0 +1,3 @@
+import { Column } from '../types';
+export declare const useColumns: <T extends unknown>(columns: Partial<Column<T, any>>[], gutterColumn?: Partial<Pick<Column<T, any>, "title" | "maxWidth" | "minWidth" | "width" | "component" | "columnData">> | undefined, stickyRightColumn?: Partial<Pick<Column<T, any>, "title" | "maxWidth" | "minWidth" | "width" | "component" | "columnData">> | undefined) => Column<T, any>[];
+//# sourceMappingURL=useColumns.d.ts.map

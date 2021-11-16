@@ -1,0 +1,343 @@
+.dsg-container {
+  border: solid 1px #e8ebed;
+  border-top: none;
+  border-left: none;
+  cursor: cell;
+  user-select: none;
+  box-sizing: border-box;
+  color: black;
+}
+
+.dsg-corner-indicator {
+  margin: auto;
+  width: 0;
+  border-bottom: solid 10px rgb(157, 166, 171);
+  border-left: solid 10px transparent;
+}
+
+.dsg-row {
+  background: white;
+  box-shadow: 0 1px #e8ebed inset;
+  display: flex;
+}
+
+.dsg-row-header {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+.dsg-cell {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background: white;
+  border: solid 1px #e8ebed;
+  border-bottom: none;
+  border-right: none;
+  box-shadow: 1px 1px #e8ebed;
+  position: relative;
+}
+
+.dsg-cell-sticky-right {
+  position: sticky;
+  right: 0;
+  z-index: 3;
+}
+
+.dsg-cell-disabled {
+  background: rgb(250, 250, 250);
+}
+
+.dsg-cell-header, .dsg-cell-gutter {
+  color: rgb(157, 166, 171);
+  transition: color .1s;
+  box-shadow: none;
+}
+
+.dsg-cell-header-container {
+  padding: 0 10px;
+}
+
+.dsg-cell-header.dsg-cell-gutter {
+  box-shadow: 1px 0 #e8ebed, 0 1px #e8ebed;
+}
+
+.dsg-cell-header.dsg-cell-sticky-right {
+  box-shadow: 0 1px #e8ebed;
+}
+
+.dsg-cell-gutter {
+  position: sticky;
+  left: 0;
+  padding: 0 5px;
+  justify-content: center;
+  z-index: 3;
+}
+
+.dsg-cell-header-active, .dsg-cell-gutter-active {
+  color: black;
+}
+
+.dsg-active-cell, .dsg-selection-rect {
+  position: absolute;
+  border: solid 2px rgb(69, 128, 230);
+  box-sizing: border-box;
+  border-radius: 2px;
+  transition: all .1s;
+  pointer-events: none;
+}
+
+.dsg-active-cell-focus {
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+}
+
+.dsg-active-cell-disabled, .dsg-selection-rect-disabled {
+  border-color: #9DA6AB;
+}
+
+.dsg-selection-rect {
+  background: rgba(69, 128, 230, 0.04);
+}
+
+.dsg-selection-rect-disabled {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dsg-scrollable-view-container {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.dsg-scrollable-view {
+  position: sticky;
+  z-index: 1;
+  box-sizing: border-box;
+  border: solid 1px #e8ebed;
+  border-bottom: none;
+  border-right: none;
+  transition: box-shadow .3s;
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-t {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-r {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-b {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-l {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-t.dsg-scrollable-view-r {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-r.dsg-scrollable-view-b {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-b.dsg-scrollable-view-l {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-l.dsg-scrollable-view-t {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-t.dsg-scrollable-view-b {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-l.dsg-scrollable-view-r {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-t.dsg-scrollable-view-r.dsg-scrollable-view-b {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-r.dsg-scrollable-view-b.dsg-scrollable-view-l {
+  box-shadow: 0 0 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-b.dsg-scrollable-view-l.dsg-scrollable-view-t {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-l.dsg-scrollable-view-t.dsg-scrollable-view-r {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 0 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-scrollable-view-t.dsg-scrollable-view-r.dsg-scrollable-view-b.dsg-scrollable-view-l {
+  box-shadow: 0 7px 7px -7px rgba(0,0,0,.2) inset, -7px 0 7px -7px rgba(0,0,0,.2) inset, 0 -7px 7px -7px rgba(0,0,0,.2) inset, 7px 0 7px -7px rgba(0,0,0,.2) inset;
+}
+
+.dsg-selection-col-marker-container {
+  position: absolute;
+  top: 0;
+}
+
+.dsg-selection-col-marker {
+  background: rgb(69, 128, 230);
+  position: sticky;
+  width: 100%;
+  height: 2px;
+}
+
+.dsg-selection-row-marker-container {
+  position: absolute;
+  left: 0;
+}
+
+.dsg-selection-row-marker {
+  background: rgb(69, 128, 230);
+  position: sticky;
+  height: 100%;
+  width: 2px;
+}
+
+.dsg-selection-col-marker-container, .dsg-selection-col-marker, .dsg-selection-row-marker-container, .dsg-selection-row-marker {
+  z-index: 2;
+  transition: all .1s;
+  pointer-events: none;
+}
+
+.dsg-selection-col-marker-disabled ,.dsg-selection-row-marker-disabled {
+  background: #9DA6AB;
+}
+
+.dsg-add-row {
+  background: #fafafa;
+  border: 1px solid #e8ebed;
+  border-top: none;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.dsg-add-row > * {
+  margin-right: 10px;
+}
+
+.dsg-add-row-btn, .dsg-add-row-input {
+  background: white;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid #dcdcdc;
+  border-radius: 2px;
+  transition: all .2s;
+}
+
+.dsg-add-row-input {
+  width: 40px;
+}
+
+.dsg-add-row-btn:hover, .dsg-add-row-input:hover {
+  border-color: #c7c7c7;
+}
+
+.dsg-add-row-btn:focus, .dsg-add-row-input:focus {
+  border-color: rgb(69, 128, 230);
+  outline: none;
+}
+
+.dsg-add-row-btn:before {
+  content: "";
+  display: inline-block;
+  margin-right: 10px;
+  background: #9da6ab;
+  width: 10px;
+  height: 2px;
+}
+
+.dsg-add-row-btn:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 14px;
+  margin-right: 10px;
+  background: #9da6ab;
+  width: 2px;
+  height: 10px;
+}
+
+.dsg-input {
+  display: block;
+  flex: 1;
+  border: none;
+  min-width: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+  background: none;
+  padding: 0 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.dsg-input-suffix {
+  padding-right: 10px;
+  opacity: .5;
+  margin-left: -5px;
+}
+
+.dsg-input-align-right {
+  text-align: right;
+}
+
+.dsg-checkbox {
+  margin: auto;
+}
+
+.dsg-context-menu {
+  position: fixed;
+  background: white;
+  z-index: 10000;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px 2px rgba(60,64,67,.15);
+  padding: 5px 0;
+}
+
+.dsg-context-menu-item {
+  padding: 3px 20px;
+  cursor: default;
+}
+
+.dsg-context-menu-item:hover {
+  background: #fafafa;
+}
+
+.dsg-expand-rows-indicator {
+  background: white;
+  border: solid 1px rgb(69, 128, 230);
+  box-shadow: 0 0 0 1px white;
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  transition: all .1s;
+  cursor: crosshair;
+}
+
+.dsg-expand-rows-indicator-disabled {
+  border: solid 1px #9DA6AB;
+}
+
+.dsg-expand-rows-rect {
+  position: absolute;
+  box-sizing: border-box;
+  transition: all .1s;
+  pointer-events: none;
+  background: rgba(0,0,0,.03);
+}

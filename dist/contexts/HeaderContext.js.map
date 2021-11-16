@@ -1,0 +1,1 @@
+{"version":3,"file":"HeaderContext.js","sourceRoot":"","sources":["../../src/contexts/HeaderContext.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAA;AAGzB,MAAM,CAAC,MAAM,aAAa,GAAG,KAAK,CAAC,aAAa,CAAyB;IACvE,OAAO,EAAE,EAAE;IACX,MAAM,EAAE,CAAC;IACT,oBAAoB,EAAE,KAAK;CAC5B,CAAC,CAAA"}

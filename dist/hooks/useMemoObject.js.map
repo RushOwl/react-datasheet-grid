@@ -1,0 +1,1 @@
+{"version":3,"file":"useMemoObject.js","sourceRoot":"","sources":["../../src/hooks/useMemoObject.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,OAAO,CAAA;AAE/B,MAAM,CAAC,MAAM,aAAa,GAAG,CAAI,MAAS,EAAK,EAAE;IAC/C,uDAAuD;IACvD,OAAO,OAAO,CAAI,GAAG,EAAE,CAAC,MAAM,EAAE,MAAM,CAAC,MAAM,CAAC,MAAM,CAAC,CAAC,CAAA;AACxD,CAAC,CAAA"}
