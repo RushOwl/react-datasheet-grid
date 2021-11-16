@@ -8,7 +8,7 @@ import Simple from '../demos/simple'
 import Xxl from '../demos/xxl'
 import CodeBlock from '@theme/CodeBlock'
 import RotatingText from 'react-rotating-text'
-import './style.css'
+// import './style.css'
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext()

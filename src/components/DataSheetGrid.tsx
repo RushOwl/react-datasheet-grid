@@ -18,7 +18,7 @@ import {
   SelectionContextType,
 } from '../types'
 import { VariableSizeList } from 'react-window'
-import '../style.css'
+// import '../style.css'
 import { Row } from './Row'
 import { useColumnWidths } from '../hooks/useColumnWidths'
 import { useResizeDetector } from 'react-resize-detector'
