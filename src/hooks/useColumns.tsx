@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import React, { useMemo } from 'react'
 import { CellProps, Column, SimpleColumn } from '../types'
 
@@ -13,30 +14,30 @@ const cellAlwaysEmpty = () => true
 export const useColumns = <T extends any>(
   columns: Partial<Column<T, any>>[],
   gutterColumn?: SimpleColumn<T, any> | false,
-  stickyRightColumn?: SimpleColumn<T, any>
+  stickyRightColumn?: SimpleColumn<T, any>,
 ): Column<T, any>[] => {
   return useMemo<Column<T, any>[]>(() => {
     const partialColumns: Partial<Column<T, any>>[] = [
       gutterColumn === false
         ? {
-            width: 0,
-            minWidth: 0,
-            // eslint-disable-next-line react/display-name
-            component: () => <></>,
-            headerClassName: 'dsg-hidden-cell',
-            cellClassName: 'dsg-hidden-cell',
-            isCellEmpty: cellAlwaysEmpty,
-          }
+          width: 0,
+          minWidth: 0,
+          // eslint-disable-next-line react/display-name
+          component: () => <></>,
+          headerClassName: 'dsg-hidden-cell',
+          cellClassName: 'dsg-hidden-cell',
+          isCellEmpty: cellAlwaysEmpty,
+        }
         : {
-            ...gutterColumn,
-            width: gutterColumn?.width ?? '0 0 40px',
-            minWidth: gutterColumn?.minWidth ?? 0,
-            title: gutterColumn?.title ?? (
-              <div className="dsg-corner-indicator" />
-            ),
-            component: gutterColumn?.component ?? defaultGutterComponent,
-            isCellEmpty: cellAlwaysEmpty,
-          },
+          ...gutterColumn,
+          width: gutterColumn?.width ?? '0 0 40px',
+          minWidth: gutterColumn?.minWidth ?? 0,
+          title: gutterColumn?.title ?? (
+          <div className="dsg-corner-indicator" />
+          ),
+          component: gutterColumn?.component ?? defaultGutterComponent,
+          isCellEmpty: cellAlwaysEmpty,
+        },
       ...columns,
     ]
 
