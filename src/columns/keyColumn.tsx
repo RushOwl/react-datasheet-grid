@@ -18,7 +18,7 @@ const KeyComponent: CellComponent<any, ColumnData> = ({
     (value) => {
       setRowData({ ...rowDataRef.current, [key]: value })
     },
-    [key, setRowData]
+    [key, setRowData],
   )
 
   if (!original.component) {
@@ -43,42 +43,36 @@ export const keyColumn = <
   T extends Record<string, any>,
   K extends keyof T = keyof T
 >(
-  key: K,
-  column: Partial<Column<T[K], any>>
-): Partial<Column<T, ColumnData>> => ({
-  id: key as string,
-  ...column,
-  // We pass the key and the original column as columnData to be able to retrieve them in the cell component
-  columnData: { key: key as string, original: column },
-  component: KeyComponent,
-  // Here we simply wrap all functions to only pass the value of the desired key to the column, and not the entire row
-  copyValue: ({ rowData, rowIndex }) =>
-    column.copyValue?.({ rowData: rowData[key], rowIndex }) ?? null,
-  deleteValue: ({ rowData, rowIndex }) => ({
-    ...rowData,
-    [key]: column.deleteValue?.({ rowData: rowData[key], rowIndex }) ?? null,
-  }),
-  pasteValue: ({ rowData, value, rowIndex }) => ({
-    ...rowData,
-    [key]:
+    key: K,
+    column: Partial<Column<T[K], any>>,
+  ): Partial<Column<T, ColumnData>> => ({
+    id: key as string,
+    ...column,
+    // We pass the key and the original column as columnData to be able to retrieve them in the cell component
+    columnData: { key: key as string, original: column },
+    component: KeyComponent,
+    // Here we simply wrap all functions to only pass the value of the desired key to the column, and not the entire row
+    copyValue: ({ rowData, rowIndex }) => column.copyValue?.({ rowData: rowData[key], rowIndex }) ?? null,
+    deleteValue: ({ rowData, rowIndex }) => ({
+      ...rowData,
+      [key]: column.deleteValue?.({ rowData: rowData[key], rowIndex }) ?? null,
+    }),
+    pasteValue: ({ rowData, value, rowIndex }) => ({
+      ...rowData,
+      [key]:
       column.pasteValue?.({ rowData: rowData[key], value, rowIndex }) ?? null,
-  }),
-  disabled:
+    }),
+    disabled:
     typeof column.disabled === 'function'
-      ? ({ rowData, rowIndex }) => {
-          return typeof column.disabled === 'function'
-            ? column.disabled({ rowData: rowData[key], rowIndex })
-            : column.disabled ?? false
-        }
+      ? ({ rowData, rowIndex }) => (typeof column.disabled === 'function'
+        ? column.disabled({ rowData: rowData[key], rowIndex })
+        : column.disabled ?? false)
       : column.disabled,
-  cellClassName:
+    cellClassName:
     typeof column.cellClassName === 'function'
-      ? ({ rowData, rowIndex }) => {
-          return typeof column.cellClassName === 'function'
-            ? column.cellClassName({ rowData: rowData[key], rowIndex })
-            : column.cellClassName ?? undefined
-        }
+      ? ({ rowData, rowIndex }) => (typeof column.cellClassName === 'function'
+        ? column.cellClassName({ rowData: rowData[key], rowIndex })
+        : column.cellClassName ?? undefined)
       : column.cellClassName,
-  isCellEmpty: ({ rowData, rowIndex }) =>
-    column.isCellEmpty?.({ rowData: rowData[key], rowIndex }) ?? false,
-})
+    isCellEmpty: ({ rowData, rowIndex }) => column.isCellEmpty?.({ rowData: rowData[key], rowIndex }) ?? false,
+  })

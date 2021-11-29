@@ -16,7 +16,7 @@ export const AddRows = ({ addRows }: AddRowsComponentProps) => {
         onBlur={() => setRawValue(String(value))}
         onChange={(e) => {
           setRawValue(e.target.value)
-          setValue(Math.max(1, Math.round(parseInt(e.target.value) || 0)))
+          setValue(Math.max(1, Math.round(parseInt(e.target.value, 10) || 0)))
         }}
         onKeyPress={(event) => {
           if (event.key === 'Enter') {

@@ -1,27 +1,26 @@
+/* eslint-disable no-plusplus */
 import React, { useContext, useMemo } from 'react'
-import { SelectionContext } from '../contexts/SelectionContext'
 import cx from 'classnames'
+import { SelectionContext } from '../contexts/SelectionContext'
 
 const buildSquare = (
   top: number | string,
   right: number | string,
   bottom: number | string,
-  left: number | string
-) => {
-  return [
-    [left, top],
-    [right, top],
-    [right, bottom],
-    [left, bottom],
-    [left, top],
-  ]
-}
+  left: number | string,
+) => [
+  [left, top],
+  [right, top],
+  [right, bottom],
+  [left, bottom],
+  [left, top],
+]
 
 const buildClipPath = (
   top: number,
   right: number,
   bottom: number,
-  left: number
+  left: number,
 ) => {
   const values = [
     ...buildSquare(0, '100%', '100%', 0),
@@ -29,13 +28,9 @@ const buildClipPath = (
   ]
 
   return `polygon(evenodd, ${values
-    .map((pair) =>
-      pair
-        .map((value) =>
-          typeof value === 'number' && value !== 0 ? value + 'px' : value
-        )
-        .join(' ')
-    )
+    .map((pair) => pair
+      .map((value) => (typeof value === 'number' && value !== 0 ? `${value}px` : value))
+      .join(' '))
     .join(',')})`
 }
 
@@ -65,8 +60,8 @@ export const SelectionRect = React.memo(() => {
       return activeCellIsDisabled
     }
 
-    for (let col = selection.min.col; col <= selection.max.col; ++col) {
-      for (let row = selection.min.row; row <= selection.max.row; ++row) {
+    for (let { col } = selection.min; col <= selection.max.col; ++col) {
+      for (let { row } = selection.min; row <= selection.max.row; ++row) {
         if (!isCellDisabled({ col, row })) {
           return false
         }
@@ -80,13 +75,9 @@ export const SelectionRect = React.memo(() => {
     return null
   }
 
-  const extraPixelV = (rowI: number): number => {
-    return rowI < dataLength - 1 ? 1 : 0
-  }
+  const extraPixelV = (rowI: number): number => (rowI < dataLength - 1 ? 1 : 0)
 
-  const extraPixelH = (colI: number): number => {
-    return colI < columnWidths.length - (hasStickyRightColumn ? 3 : 2) ? 1 : 0
-  }
+  const extraPixelH = (colI: number): number => (colI < columnWidths.length - (hasStickyRightColumn ? 3 : 2) ? 1 : 0)
 
   const activeCellRect = activeCell && {
     width: columnWidths[activeCell.col + 1] + extraPixelH(activeCell.col),
@@ -112,29 +103,29 @@ export const SelectionRect = React.memo(() => {
 
   const expandRowsIndicator = maxSelection &&
     expandSelection !== null && {
-      left: columnRights[maxSelection.col] + columnWidths[maxSelection.col + 1],
-      top: rowHeight * (maxSelection.row + 1) + headerRowHeight,
-      transform: `translate(-${
-        maxSelection.col < columnWidths.length - (hasStickyRightColumn ? 3 : 2)
-          ? 50
-          : 100
-      }%, -${maxSelection.row < dataLength - 1 ? 50 : 100}%)`,
-    }
+    left: columnRights[maxSelection.col] + columnWidths[maxSelection.col + 1],
+    top: rowHeight * (maxSelection.row + 1) + headerRowHeight,
+    transform: `translate(-${
+      maxSelection.col < columnWidths.length - (hasStickyRightColumn ? 3 : 2)
+        ? 50
+        : 100
+    }%, -${maxSelection.row < dataLength - 1 ? 50 : 100}%)`,
+  }
 
   const expandRowsRect = minSelection &&
     maxSelection &&
     expandSelection !== null && {
-      width:
+    width:
         columnWidths
           .slice(minSelection.col + 1, maxSelection.col + 2)
           .reduce((a, b) => a + b) + extraPixelH(maxSelection.col),
-      height:
+    height:
         rowHeight * expandSelection +
         extraPixelV(maxSelection.row + expandSelection) -
         1,
-      left: columnRights[minSelection.col],
-      top: rowHeight * (maxSelection.row + 1) + headerRowHeight + 1,
-    }
+    left: columnRights[minSelection.col],
+    top: rowHeight * (maxSelection.row + 1) + headerRowHeight + 1,
+  }
 
   return (
     <>
@@ -142,7 +133,7 @@ export const SelectionRect = React.memo(() => {
         className="dsg-scrollable-view-container"
         style={{
           height: dataLength * rowHeight + headerRowHeight,
-          width: contentWidth ? contentWidth : '100%',
+          width: contentWidth || '100%',
         }}
       >
         <div
@@ -165,11 +156,11 @@ export const SelectionRect = React.memo(() => {
                     ? columnWidths[columnWidths.length - 1]
                     : 0)
                 : `calc(100% - ${
-                    columnWidths[0] +
+                  columnWidths[0] +
                     (hasStickyRightColumn
                       ? columnWidths[columnWidths.length - 1]
                       : 0)
-                  }px)`,
+                }px)`,
           }}
         />
       </div>
@@ -185,7 +176,7 @@ export const SelectionRect = React.memo(() => {
           <div
             className={cx(
               'dsg-selection-col-marker',
-              selectionIsDisabled && 'dsg-selection-col-marker-disabled'
+              selectionIsDisabled && 'dsg-selection-col-marker-disabled',
             )}
             style={{ top: headerRowHeight }}
           />
@@ -197,13 +188,13 @@ export const SelectionRect = React.memo(() => {
           style={{
             top: selectionRect?.top ?? activeCellRect?.top,
             height: selectionRect?.height ?? activeCellRect?.height,
-            width: contentWidth ? contentWidth : '100%',
+            width: contentWidth || '100%',
           }}
         >
           <div
             className={cx(
               'dsg-selection-row-marker',
-              selectionIsDisabled && 'dsg-selection-row-marker-disabled'
+              selectionIsDisabled && 'dsg-selection-row-marker-disabled',
             )}
             style={{ left: columnWidths[0] }}
           />
@@ -222,7 +213,7 @@ export const SelectionRect = React.memo(() => {
         <div
           className={cx(
             'dsg-selection-rect',
-            selectionIsDisabled && 'dsg-selection-rect-disabled'
+            selectionIsDisabled && 'dsg-selection-rect-disabled',
           )}
           style={{
             ...selectionRect,
@@ -230,7 +221,7 @@ export const SelectionRect = React.memo(() => {
               activeCellRect.top - selectionRect.top,
               activeCellRect.left - selectionRect.left,
               activeCellRect.top + activeCellRect.height - selectionRect.top,
-              activeCellRect.left + activeCellRect.width - selectionRect.left
+              activeCellRect.left + activeCellRect.width - selectionRect.left,
             ),
           }}
         />
@@ -242,7 +233,7 @@ export const SelectionRect = React.memo(() => {
         <div
           className={cx(
             'dsg-expand-rows-indicator',
-            selectionIsDisabled && 'dsg-expand-rows-indicator-disabled'
+            selectionIsDisabled && 'dsg-expand-rows-indicator-disabled',
           )}
           style={expandRowsIndicator}
         />

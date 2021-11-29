@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { parseDom } from './domParser'
 
 export const parseTextHtmlData = (data: string): string[][] => {

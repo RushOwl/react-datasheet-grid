@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react'
 import { useCallback, useRef } from 'react'
 import { useDocumentEventListener } from '../hooks/useDocumentEventListener'
@@ -51,14 +53,14 @@ export const ContextMenu = ({
         close()
       }
     },
-    [close]
+    [close],
   )
   useDocumentEventListener('mousedown', onClickOutside)
 
   return (
     <div
       className="dsg-context-menu"
-      style={{ left: clientX + 'px', top: clientY + 'px' }}
+      style={{ left: `${clientX}px`, top: `${clientY}px` }}
       ref={containerRef}
     >
       {items.map((item) => (

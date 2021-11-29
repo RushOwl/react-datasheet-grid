@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
-import { CellComponent, CellProps, Column } from '../types'
 import cx from 'classnames'
+import { CellComponent, CellProps, Column } from '../types'
 
 type TextColumnOptions<T> = {
   placeholder?: string
@@ -79,29 +79,27 @@ const TextComponent = React.memo<
         if (ref.current) {
           // Make sure to first format the input
           ref.current.value = asyncRef.current.formatInputOnFocus(
-            asyncRef.current.rowData
+            asyncRef.current.rowData,
           )
           ref.current.select()
         }
 
         // We immediately reset the escPressed
         asyncRef.current.escPressed = false
-      }
+      } // eslint-disable-line brace-style
       // When the cell looses focus (by pressing Esc, Enter, clicking away...) we make sure to blur the input
       // Otherwise the user would still see the cursor blinking
-      else {
-        if (ref.current) {
-          // Update the row's value on blur only if the user did not press escape (only relevant when continuousUpdates is false)
-          if (
-            !asyncRef.current.escPressed &&
-            !asyncRef.current.continuousUpdates
-          ) {
-            asyncRef.current.setRowData(
-              asyncRef.current.parseUserInput(ref.current.value)
-            )
-          }
-          ref.current.blur()
+      else if (ref.current) {
+        // Update the row's value on blur only if the user did not press escape (only relevant when continuousUpdates is false)
+        if (
+          !asyncRef.current.escPressed &&
+          !asyncRef.current.continuousUpdates
+        ) {
+          asyncRef.current.setRowData(
+            asyncRef.current.parseUserInput(ref.current.value),
+          )
         }
+        ref.current.blur()
       }
     }, [focus])
 
@@ -139,12 +137,10 @@ const TextComponent = React.memo<
         }}
       />
     )
-  }
+  },
 )
 
 TextComponent.displayName = 'TextComponent'
-
-export const textColumn = createTextColumn<string | null>()
 
 export function createTextColumn<T = string | null>({
   placeholder,
@@ -155,8 +151,7 @@ export function createTextColumn<T = string | null>({
   formatBlurredInput = (value) => String(value ?? ''),
   formatInputOnFocus = (value) => String(value ?? ''),
   formatForCopy = (value) => String(value ?? ''),
-  parsePastedValue = (value) =>
-    (value.replace(/[\n\r]+/g, ' ').trim() || (null as unknown)) as T,
+  parsePastedValue = (value) => (value.replace(/[\n\r]+/g, ' ').trim() || (null as unknown)) as T,
 }: TextColumnOptions<T> = {}): Partial<Column<T, TextColumnData<T>>> {
   return {
     component: TextComponent as unknown as CellComponent<T, TextColumnData<T>>,
@@ -174,3 +169,5 @@ export function createTextColumn<T = string | null>({
     isCellEmpty: ({ rowData }) => rowData === null || rowData === undefined,
   }
 }
+
+export const textColumn = createTextColumn<string | null>()

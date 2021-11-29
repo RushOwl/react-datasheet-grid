@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 export const useDocumentEventListener = (
   type: string,
-  listener: (...args: any[]) => void
+  listener: (...args: any[]) => void,
 ) => {
   useEffect(() => {
     document.addEventListener(type, listener)

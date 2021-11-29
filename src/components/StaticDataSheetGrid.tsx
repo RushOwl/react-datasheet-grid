@@ -1,7 +1,6 @@
+import React, { useState } from 'react'
 import { DataSheetGridProps, DataSheetGridRef } from '../types'
-import { useState } from 'react'
 import { DataSheetGrid } from './DataSheetGrid'
-import React from 'react'
 
 export const StaticDataSheetGrid = React.forwardRef<
   DataSheetGridRef,
@@ -22,7 +21,7 @@ export const StaticDataSheetGrid = React.forwardRef<
       onSelectionChange,
       ...rest
     }: DataSheetGridProps<T>,
-    ref: React.ForwardedRef<DataSheetGridRef>
+    ref: React.ForwardedRef<DataSheetGridRef>,
   ) => {
     const [staticProps] = useState({
       columns,
@@ -39,7 +38,7 @@ export const StaticDataSheetGrid = React.forwardRef<
     })
 
     return <DataSheetGrid {...staticProps} {...rest} ref={ref} />
-  }
+  },
 ) as <T extends any>(
   props: DataSheetGridProps<T> & { ref?: React.ForwardedRef<DataSheetGridRef> }
 ) => JSX.Element

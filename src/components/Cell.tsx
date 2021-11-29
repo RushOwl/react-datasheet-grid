@@ -17,24 +17,22 @@ export const Cell: FC<{
   active,
   disabled,
   className,
-}) => {
-  return (
-    <div
-      className={cx(
-        'dsg-cell',
-        gutter && 'dsg-cell-gutter',
-        disabled && 'dsg-cell-disabled',
-        gutter && active && 'dsg-cell-gutter-active',
-        stickyRight && 'dsg-cell-sticky-right',
-        className
-      )}
-      style={{
-        flex: String(column.width),
-        minWidth: column.minWidth,
-        maxWidth: column.maxWidth,
-      }}
-    >
-      {children}
-    </div>
-  )
-}
+}) => (
+  <div
+    className={cx(
+      'dsg-cell',
+      gutter && 'dsg-cell-gutter',
+      disabled && 'dsg-cell-disabled',
+      gutter && active && 'dsg-cell-gutter-active',
+      stickyRight && 'dsg-cell-sticky-right',
+      className,
+    )}
+    style={{
+      flex: String(column.width),
+      minWidth: column.minWidth,
+      maxWidth: column.maxWidth,
+    }}
+  >
+    {children}
+  </div>
+)

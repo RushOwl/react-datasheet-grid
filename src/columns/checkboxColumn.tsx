@@ -19,7 +19,9 @@ const FALSY = [
 ]
 
 const CheckboxComponent = React.memo<CellProps<boolean, any>>(
-  ({ focus, rowData, setRowData, active, stopEditing }) => {
+  ({
+    focus, rowData, setRowData, active, stopEditing,
+  }) => {
     const ref = useRef<HTMLInputElement>(null)
 
     // When cell becomes focus we immediately toggle the checkbox and blur the cell by calling `stopEditing`
@@ -47,7 +49,7 @@ const CheckboxComponent = React.memo<CellProps<boolean, any>>(
         onChange={() => null}
       />
     )
-  }
+  },
 )
 
 CheckboxComponent.displayName = 'CheckboxComponent'

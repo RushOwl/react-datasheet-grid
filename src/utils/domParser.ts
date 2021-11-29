@@ -3,6 +3,4 @@ const parser =
     ? new DOMParser()
     : { parseFromString: () => null as unknown as Document }
 
-export const parseDom = (html: string): Document => {
-  return parser.parseFromString(html, 'text/html')
-}
+export const parseDom = (html: string): Document => parser.parseFromString(html, 'text/html')

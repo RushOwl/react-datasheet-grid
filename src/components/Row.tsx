@@ -1,7 +1,7 @@
 import { areEqual, ListChildComponentProps } from 'react-window'
-import { ListItemData, RowProps } from '../types'
 import React, { useCallback } from 'react'
 import cx from 'classnames'
+import { ListItemData, RowProps } from '../types'
 import { Cell } from './Cell'
 import { useFirstRender } from '../hooks/useFirstRender'
 
@@ -34,7 +34,7 @@ const RowComponent = React.memo(
       (rowData: any) => {
         setRowData(index, rowData)
       },
-      [index, setRowData]
+      [index, setRowData],
     )
 
     const deleteGivenRow = useCallback(() => {
@@ -71,7 +71,7 @@ const RowComponent = React.memo(
                 !column.renderWhenScrolling && renderLight && 'dsg-cell-light',
                 typeof column.cellClassName === 'function'
                   ? column.cellClassName({ rowData: data, rowIndex: index })
-                  : column.cellClassName
+                  : column.cellClassName,
               )}
             >
               {(column.renderWhenScrolling || !renderLight) && (
@@ -107,7 +107,7 @@ const RowComponent = React.memo(
 
     // When we are scrolling always re-use previous render, otherwise check props
     return nextIsScrolling || (!prevIsScrolling && areEqual(prevRest, nextRest))
-  }
+  },
 )
 
 RowComponent.displayName = 'RowComponent'
@@ -137,7 +137,7 @@ export const Row = <T extends any>({
       active={Boolean(
         index - 1 >= (data.selectionMinRow ?? Infinity) &&
           index - 1 <= (data.selectionMaxRow ?? -Infinity) &&
-          data.activeCell
+          data.activeCell,
       )}
       activeColIndex={
         data.activeCell?.row === index - 1 ? data.activeCell.col : null

@@ -5,7 +5,7 @@ import { useDeepEqualState } from './useDeepEqualState'
 export const useEdges = (
   ref: React.RefObject<HTMLElement>,
   width?: number,
-  height?: number
+  height?: number,
 ) => {
   const [edges, setEdges] = useDeepEqualState({
     top: true,
@@ -28,7 +28,7 @@ export const useEdges = (
       })
     })
 
-    const current = ref.current
+    const { current } = ref
     current?.addEventListener('scroll', onScroll)
     setTimeout(onScroll, 100)
 

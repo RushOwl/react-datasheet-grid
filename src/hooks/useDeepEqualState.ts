@@ -1,8 +1,10 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import {
+  Dispatch, SetStateAction, useCallback, useState,
+} from 'react'
 import deepEqual from 'fast-deep-equal'
 
 export const useDeepEqualState = <T>(
-  defaultValue: T
+  defaultValue: T,
 ): [T, Dispatch<SetStateAction<T>>] => {
   const [value, setValue] = useState<T>(defaultValue)
 
@@ -17,7 +19,7 @@ export const useDeepEqualState = <T>(
         return deepEqual(nextValue, prevValue) ? prevValue : nextValue
       })
     },
-    [setValue]
+    [setValue],
   )
 
   return [value, customSetValue]

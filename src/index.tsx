@@ -30,3 +30,6 @@ export { intColumn } from './columns/intColumn'
 export { percentColumn } from './columns/percentColumn'
 export { dateColumn } from './columns/dateColumn'
 export { keyColumn } from './columns/keyColumn'
+
+// custom
+export { selectColumn } from './columns/selectColumn'

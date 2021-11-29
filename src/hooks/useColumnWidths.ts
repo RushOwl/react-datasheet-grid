@@ -1,10 +1,11 @@
-import { Column } from '../types'
+/* eslint-disable no-shadow */
 import { useEffect, useMemo, useState } from 'react'
+import { Column } from '../types'
 import { useDeepEqualState } from './useDeepEqualState'
 
 export const useColumnWidths = (
   columns: Column<any, any>[],
-  width?: number
+  width?: number,
 ) => {
   const [columnWidths, setColumnWidths] = useDeepEqualState<
     number[] | undefined
@@ -18,6 +19,7 @@ export const useColumnWidths = (
 
     let total = 0
 
+    // eslint-disable-next-line no-shadow
     const columnRights = columnWidths.map((w, i) => {
       total += w
       return i === columnWidths.length - 1 ? Infinity : total
@@ -30,9 +32,7 @@ export const useColumnWidths = (
   }, [columnWidths])
 
   const columnsHash = columns
-    .map(({ width, minWidth, maxWidth }) =>
-      [width, minWidth, maxWidth].join(',')
-    )
+    .map(({ width, minWidth, maxWidth }) => [width, minWidth, maxWidth].join(','))
     .join('|')
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { HeaderContext } from '../contexts/HeaderContext'
 import cx from 'classnames'
+import { HeaderContext } from '../contexts/HeaderContext'
 import { Cell } from './Cell'
 
 export const HeaderRow = React.memo(() => {
@@ -17,7 +17,7 @@ export const HeaderRow = React.memo(() => {
     <div
       className={cx('dsg-row', 'dsg-row-header')}
       style={{
-        width: contentWidth ? contentWidth : '100%',
+        width: contentWidth || '100%',
         height,
       }}
     >
@@ -34,7 +34,7 @@ export const HeaderRow = React.memo(() => {
               activeColMin <= i - 1 &&
               activeColMax >= i - 1 &&
               'dsg-cell-header-active',
-            column.headerClassName
+            column.headerClassName,
           )}
         >
           <div className="dsg-cell-header-container">{column.title}</div>

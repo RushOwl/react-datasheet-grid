@@ -1,24 +1,25 @@
-import { RefObject, useCallback, useMemo, useRef } from 'react'
+import {
+  RefObject, useCallback, useMemo, useRef,
+} from 'react'
 import { throttle } from 'throttle-debounce'
 
 // Cache bounding rect in a ref and only recompute every <delay>ms
 export const useGetBoundingClientRect = (
   ref: RefObject<HTMLElement>,
-  delay = 200
+  delay = 200,
 ) => {
   const boundingRect = useRef<DOMRect | null>(null)
 
   const throttledCompute = useMemo(
-    () =>
-      throttle(delay, true, () => {
-        setTimeout(
-          () =>
-            (boundingRect.current =
+    () => throttle(delay, true, () => {
+      setTimeout(
+        // eslint-disable-next-line no-return-assign
+        () => (boundingRect.current =
               ref.current?.getBoundingClientRect() || null),
-          0
-        )
-      }),
-    [ref, delay]
+        0,
+      )
+    }),
+    [ref, delay],
   )
 
   return useCallback(
@@ -30,6 +31,6 @@ export const useGetBoundingClientRect = (
       }
       return boundingRect.current
     },
-    [ref, throttledCompute]
+    [ref, throttledCompute],
   )
 }

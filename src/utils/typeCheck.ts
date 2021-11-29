@@ -1,10 +1,12 @@
-import { Cell, CellWithId, Column, Selection, SelectionWithId } from '../types'
+import {
+  Cell, CellWithId, Column, Selection, SelectionWithId,
+} from '../types'
 
 export const getCell = (
   value: any,
   colMax: number,
   rowMax: number,
-  columns: Column<any, any>[]
+  columns: Column<any, any>[],
 ): Cell | null => {
   if (value === null || !colMax || !rowMax) {
     return null
@@ -19,12 +21,12 @@ export const getCell = (
   const cell: Cell = {
     col: Math.max(
       0,
-      Math.min(colMax - 1, colIndex === -1 ? Number(value.col) : colIndex - 1)
+      Math.min(colMax - 1, colIndex === -1 ? Number(value.col) : colIndex - 1),
     ),
     row: Math.max(0, Math.min(rowMax - 1, Number(value.row))),
   }
 
-  if (isNaN(cell.col) || isNaN(cell.row)) {
+  if (Number.isNaN(cell.col) || Number.isNaN(cell.row)) {
     throw new Error('col or cell are not valid positive numbers')
   }
 
@@ -33,20 +35,19 @@ export const getCell = (
 
 export const getCellWithId = (
   cell: Cell | null,
-  columns: Column<any, any>[]
-): typeof cell extends null ? CellWithId | null : CellWithId =>
-  cell
-    ? {
-        ...cell,
-        colId: columns[cell.col + 1]?.id,
-      }
-    : (null as never)
+  columns: Column<any, any>[],
+): typeof cell extends null ? CellWithId | null : CellWithId => (cell
+  ? {
+    ...cell,
+    colId: columns[cell.col + 1]?.id,
+  }
+  : (null as never))
 
 export const getSelection = (
   value: any,
   colMax: number,
   rowMax: number,
-  columns: Column<any, any>[]
+  columns: Column<any, any>[],
 ): Selection | null => {
   if (value === null || !colMax || !rowMax) {
     return null
@@ -70,11 +71,10 @@ export const getSelection = (
 
 export const getSelectionWithId = (
   selection: Selection | null,
-  columns: Column<any, any>[]
-): SelectionWithId | null =>
-  selection
-    ? {
-        min: getCellWithId(selection.min, columns),
-        max: getCellWithId(selection.max, columns),
-      }
-    : null
+  columns: Column<any, any>[],
+): SelectionWithId | null => (selection
+  ? {
+    min: getCellWithId(selection.min, columns),
+    max: getCellWithId(selection.max, columns),
+  }
+  : null)
