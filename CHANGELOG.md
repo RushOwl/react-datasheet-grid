@@ -1,5 +1,17 @@
 # Change Log
 
+## 3.3.7
+> Date: 2021-11-23
+### Added
+- Now uses CSS custom properties to style DSG for easier customization.
+
+## 3.3.6
+> Date: 2021-11-20
+### Added
+- The `gutterColumn` prop now supports `false` to disable the gutter.
+### Fixed
+- Update context menu style to force text color to be black event when parent is white.
+
 ## 3.3.5
 > Date: 2021-11-03
 ### Fixed
